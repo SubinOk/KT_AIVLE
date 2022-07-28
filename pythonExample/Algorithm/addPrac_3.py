@@ -12,6 +12,8 @@ def solution(left, right):
     return answer
 
 def findDivEven(n):
+    # 제곱수만 약수 개수가 홀수라는 것을 응용하여 코드 간소화 가능
+    # 루트는 math 라이브러리 내 math.sqrt() 응용하거나 n**(1/2)로 표현
     count = 0
     for i in range(1, n+1):
         if not n%i:

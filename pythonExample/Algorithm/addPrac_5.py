@@ -16,6 +16,9 @@ b = 0
 for i in range(len(n)//2):
     a += int(left[i])
     b += int(right[i])
+    # a += int(n[i])
+    # b += int(n[len(n)//2 + i])
+    # left, right 로 나누지 않고 코드 간략화 가능
 
 if a==b:
     print("LUCKY")

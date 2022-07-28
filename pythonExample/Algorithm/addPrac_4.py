@@ -4,19 +4,14 @@
 단, + 보다 x 를 먼저 계산하는 일반적인 방식과 달리 모든 연산은 왼쪽에서부터 순서대로 이루어진다고 가정합니다.
 """
 
-str = input('숫자로 이루어진 문자열을 입력하세요: ')
-data = []
+data = input('숫자로 이루어진 문자열을 입력하세요: ')
+result = int(data[0])
 
-for i in str:
-    prev = data[i-1]
-    if i != len(data) - 1:
-        next = data[i+1]
-        
-    if prev == 0:
-        result += data[i]
-    elif data[i] == 0:
-        continue
+for i in range(1, len(data)):    
+    tmp = int(data[i])
+    if tmp <= 1 or result <= 1: # 0 또는 1인 경우 or 이전의 수가 0일 경우 더하기 수행
+        result += tmp
     else:
-        result *= data[i]
+        result *= tmp
          
 print(result)
