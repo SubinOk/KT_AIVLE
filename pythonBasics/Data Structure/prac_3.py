@@ -1,5 +1,6 @@
 # 리스트와 검색할 값을 사용자로부터 입력받아 검색값이 있는 인덱스 출력
 # 검색 방안은 어떤 방안을 사용하여도 상관 없음
+# 이때, 중복된 값은 없으며 리스트는 정렬되어있다고 가정한다.
 
 def binarySearch(a, key):
     first, last = 0, len(a)-1
@@ -15,8 +16,6 @@ def binarySearch(a, key):
 
 x = list(map(int, input('리스트 값을 입력하세요: ').split()))
 key = int(input('검색할 값을 입력하세요: '))
-
-x.sort()
 idx = binarySearch(x, key)
 
 if idx == -1:
