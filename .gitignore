@@ -1,0 +1,14 @@
+*.xlsx
+*.csv
+*.exe
+*.pkl
+
+02 PythonLibrary/data
+02 PythonLibrary/raw.githubusercontent.com
+
+03 WebCrawling/__pycache__
+03 WebCrawling/data
+03 WebCrawling/gmarket
+
+07 AI모델 해석 및 평가/다운로드.png
+07 AI모델 해석 및 평가/시험문제.ipynb
