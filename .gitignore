@@ -13,8 +13,8 @@
 07 AI모델 해석 및 평가/다운로드.png
 07 AI모델 해석 및 평가/시험문제.ipynb
 
-09 ComputerVision/data
-09 ComputerVision/rawdata
-09 ComputerVision/Results
-09 ComputerVision/Street_images
+09 ComputerVision/data/
+09 ComputerVision/rawdata/
+09 ComputerVision/Results/
+09 ComputerVision/Street_images/
 09 ComputerVision/band.yaml
