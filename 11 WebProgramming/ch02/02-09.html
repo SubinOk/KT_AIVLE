@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>02-09</title>
+<script type="text/javascript">
+    var a1 = "1" + "2";
+    var a2 = 1 + "2";
+    var a3 = "1" + 2;
+    var a4 = 1 + 2;
+
+    console.log(a1); // "12"
+    console.log(a2); // "12"
+    console.log(a3); // "12"
+    console.log(a4); // 3
+    console.log('=======');
+
+    var b1 = "2" * "3";
+    console.log(b1); // 6
+    console.log('=======');
+
+    var c1 = parseInt("123")
+    var c2 = parseInt("abc")
+    var c3 = parseInt("123abc")
+    var c4 = Number("123abc")
+    var c5 = 123 - "23"
+    var c6 = 123 - "abc"
+
+    console.log(c1); // 123
+    console.log(c2); // NaN
+    console.log(c3); // 123
+    console.log(c4); // NaN
+    console.log(c5); // 100
+    console.log(c6); // NaN
+</script>
+</head>
+<body>
+</body>
+</html>
