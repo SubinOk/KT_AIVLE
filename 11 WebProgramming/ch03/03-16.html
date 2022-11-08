@@ -4,7 +4,15 @@
         <meta charset="utf-8">
         <title>03-16</title>
         <script type="text/javascript">
-           
+            var g = 'GLOBAL'
+            function test(){
+                console.log(g); // undefined: 함수 내에서 메모리 할당만 되고 초기화 X
+                if (false){
+                    var g = "TEST";
+                }
+                console.log(g); // undefined
+            }
+            test();
         </script>
     </head>
     <body>

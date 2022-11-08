@@ -4,7 +4,15 @@
         <meta charset="utf-8">
         <title>03-18</title>
         <script type="text/javascript">
-          
+            function outer(x){
+                function inner(y){
+                    return x+y;
+                }
+                return inner;
+            }
+            window.a = outer(4);
+            var result = a(5);
+            console.log(result) // 9
         </script>
     </head>
     <body>

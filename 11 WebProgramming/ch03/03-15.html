@@ -4,7 +4,13 @@
         <meta charset="utf-8">
         <title>03-15</title>
         <script type="text/javascript">
-           
+        var g = 'GLOBAL';
+        function test(){
+            console.log(g); // undefined - 내부에서 정의 X
+            var g = 'TEST';
+            console.log(g); // TEST
+        }
+        test();
         </script>
     </head>
     <body>

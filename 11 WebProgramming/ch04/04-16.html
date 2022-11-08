@@ -4,6 +4,20 @@
     <meta charset="utf-8">
     <title>04-16</title>
     <script type="text/javascript">
+      var p1 = {nick: '박문수', age:20};
+      p1.getInfo = function(){
+        return this.nick + '님의 나이: ' + this.age;
+      }
+      
+      p1.getInfo2 = function(){
+        function inner(){
+          return this.nick + ' is ' + this.age + ' years old.';
+        }
+        return inner.apply(this)
+      }
+
+      console.log(p1.getInfo()) // 박문수님의 나이: 20
+      console.log(p1.getInfo2()) // 박문수 is 20 years old.
      
      
     </script>

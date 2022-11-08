@@ -4,7 +4,16 @@
     <meta charset="utf-8">
         <title>03-07</title>
         <script type="text/javascript">
-            
+            function test(a, b, c){
+                console.log(a);
+                console.log(b);
+                console.log(c);
+                console.dir(arguments)
+            }
+
+            test(100, 200, 300); // 100 200 300
+            test(100); // 100 undefined undefined
+            test(100, 200, 300, 400, 500); // 100 200 300
         </script>
     </head>
     <body>

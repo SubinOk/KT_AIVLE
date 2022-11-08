@@ -12,8 +12,16 @@
         hiredate : new Date("2010-09-01")
       };
 
-      
-      
+      var str = JSON.stringify(data, function(key, value){
+        if (key == 'hiredate'){
+          return new Date(value).getTime();
+        }
+        else{
+          return value;
+        }
+      });
+
+      console.log(str);      
       
     </script>
   </head>

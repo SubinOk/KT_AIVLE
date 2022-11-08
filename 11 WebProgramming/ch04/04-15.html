@@ -4,8 +4,20 @@
     <meta charset="utf-8">
     <title>04-15</title>
     <script type="text/javascript">
-    
-    
+      function test(x, y){
+        var result = x + y;
+        this.result = result
+      }
+      test(1, 2);
+      console.log(window.result); // 3
+
+      var p1 = {name: '홍길동'};
+      test.apply(p1, [3, 4]);
+      console.log(p1.result); // 7
+
+      var p2 = {name: '이몽룡'};
+      test.apply(p2, [5, 6]);
+      console.log(p2.result); // 11
     </script>
   </head>
   <body>

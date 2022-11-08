@@ -4,7 +4,20 @@
         <meta charset="utf-8">
         <title>03-20</title>
         <script type="text/javascript">
-            
+            function getCounter(base){
+                var num = base;
+                return function(){
+                    return {base: base, count: ++num}
+                }
+            }
+
+            var counter1 = getCounter(10);
+            var counter2 = getCounter(500);
+            console.log(counter1()); // {base: 10, count: 11}
+            console.log(counter1()); // {base: 10, count: 12}
+            console.log(counter2()); // {base: 500, count: 501}
+            console.log(counter2()); // {base: 500, count: 502}
+            console.log(counter2()); // {base: 500, count: 503}
         </script>
     </head>
     <body>

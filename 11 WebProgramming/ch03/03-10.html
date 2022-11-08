@@ -4,7 +4,16 @@
         <meta charset="utf-8">
         <title>03-10</title>
         <script type="text/javascript">
-           
+            var setmsg = function(msg){
+                return function(name){
+                    return msg + " " + name
+                }
+            }
+
+            var m = setmsg('hello');
+            console.log(m('홍길동')); // hello 홍길동
+            console.log(m('이몽룡')); // hello 이몽룡
+            console.log(m('성춘향')); // hello 성춘향
         </script>
     </head>
     <body>

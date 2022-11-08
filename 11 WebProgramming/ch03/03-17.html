@@ -4,7 +4,32 @@
       <meta charset="utf-8">
       <title>03-17</title>
       <script type="text/javascript">
-        
+         // function 1
+         function test1(){
+            a1();
+            function a1(){
+               console.log('world');
+            }
+         }
+         test1(function(){console.log('hello');}) // world
+
+         // function 2
+         var a2 = 1
+         function test2(){
+            a2 = 10
+            return;
+            function a2(){}
+         }
+         test2();
+         console.log(a2); // 1
+
+         // function 3
+         var test3 = (function f(){
+            function f(){return 'hello';}
+            return f;
+            function f(){return 'world';}
+         })();
+         console.log(test3()); // world
       </script>
    </head>
    <body>

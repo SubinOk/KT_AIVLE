@@ -4,7 +4,16 @@
         <meta charset="utf-8">
         <title>03-14</title>
         <script type="text/javascript">
-            
+            function test(){
+                var num = 100;
+                for(var num = 0; num < 10; num++){
+                    console.log(num);
+                }
+                return num;
+            }
+
+            var result = test(); // test 함수 실행(0-9 출력)
+            console.log('최종 결과: ' + result) // 최종 결과: 10
         </script>
     </head>
     <body>
