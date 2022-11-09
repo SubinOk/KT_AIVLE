@@ -12,10 +12,10 @@
 </head>
 <body>
 <div id="example" class="container layout1">
-    <p><input type="text"  class="form-control" /></p>
+    <p><input type="text" v-model="amount" class="form-control" /></p>
     <p>
-        <button id="deposit"    class="btn btn-primary">예금</button>
-        <button id="withdraw"   class="btn btn-primary">인출</button>
+        <button id="deposit" @click="balance += parseInt(amount)" class="btn btn-primary">예금</button>
+        <button id="withdraw" @click="balance -= parseInt(amount)" class="btn btn-primary">인출</button>
     </p>            
     <h3>계좌 잔고 : {{balance}}</h3>
 </div>

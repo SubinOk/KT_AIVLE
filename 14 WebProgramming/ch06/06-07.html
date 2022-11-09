@@ -7,7 +7,7 @@
 </head>
 <body>
   <div id="account">
-    잔고 : <input type="text"  />
+    잔고 : <input type="text" v-model="balance" />
     <br />
     회원님의 등급 : 
     <span v-if="balance >= 1000000">Gold</span>
@@ -16,7 +16,9 @@
     <span v-else>Basic</span>
   </div>
   <script type="text/javascript">
- 
+    var simple1 = new Vue({
+      el: '#account', data: {balance: 0}
+    });
   </script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-    <div id="exmaple">
+    <div id="example">
 	<table id="list">
 		<thead>
 			<tr>
@@ -20,14 +20,14 @@
             </tr>
 		</thead>
         <tbody id="contacts">
-            <template >
+            <template v-for="(contact, index) in contacts">
             <tr>
                 <td>{{contact.no}}</td>
                 <td>{{contact.name}}</td>
                 <td>{{contact.tel}}</td>
                 <td>{{contact.address}}</td>
             </tr>
-            <tr class="divider" >
+            <tr class="divider" v-if="index%5===4">
                 <td colspan="4"></td>
             </tr>
             </template>
@@ -53,7 +53,10 @@
         ]
     }
 
-   
+    var list = new Vue({
+        el: '#example', 
+        data: model
+        });
     </script>
 </body>
 </html>
