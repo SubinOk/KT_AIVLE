@@ -3,21 +3,13 @@
 *.exe
 *.pkl
 
-02 PythonLibrary/data
-02 PythonLibrary/raw.githubusercontent.com
-
-03 WebCrawling/__pycache__
-03 WebCrawling/data
-03 WebCrawling/gmarket
+04 WebCrawling/data
+04 WebCrawling/gmarket
 
 07 AI모델 해석 및 평가/다운로드.png
 07 AI모델 해석 및 평가/시험문제.ipynb
 
-09 ComputerVision/data/
-09 ComputerVision/rawdata/
-09 ComputerVision/Results/
-09 ComputerVision/Street_images/
-09 ComputerVision/band.yaml
+10 ComputerVision/data/
 
-10 NLP/data
-10 NLP/Mecab-ko-for-Google-Colab
+11 NLP/data
+11 NLP/Mecab-ko-for-Google-Colab
