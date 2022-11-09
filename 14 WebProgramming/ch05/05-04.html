@@ -5,7 +5,18 @@
         <title>05-04</title>
         <script type="text/javascript">
             var arr = [10,20,30,40,50];
-           
+            
+            arr.splice(1, 0, 'hello') // index 1부터 시작, 아무것도 삭제하지 않고 'hello' 추가
+            console.log(arr) // [10, 'hello', 20, 30, 40, 50]
+            
+            arr.splice(3, 0, 'world 1', 'world 2') // index 1부터 시작, 아무것도 삭제하지 않고 'world 1', 'world 2' 추가
+            console.log(arr) // [10, 'hello', 20, 'world 1', 'world 2', 30, 40, 50]
+            
+            arr.splice(5, 2) // index 5부터 2개 삭제
+            console.log(arr) // [10, 'hello', 20, 'world 1', 'world 2', 50]
+            
+            arr.splice(2, 1, 'jquery!!') // index 2부터 1개 삭제 후 'jquery!!' 추가
+            console.log(arr) // [10, 'hello', 'jquery!!', 'world 1', 'world 2', 50]
         </script>
     </head>
     <body>

@@ -19,8 +19,17 @@
             }; 
 
             var obj = { sum : 0, count : 0 };
+            var arr = data.scores.map(function(item, index){
+                var score = item.correct / item.total * 100;
+                console.log(item.name + ': ' + score);
+                this.sum += score;
+                this.count++;
+                return {'name': item.name, 'score':score}
+            }, obj);
 
-
+            var totalAvg = obj.sum / obj.count
+            console.log('-----------------')
+            console.log('전체 평균: ' + totalAvg)
         </script>
     </head>
     <body>
