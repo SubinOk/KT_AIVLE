@@ -12,6 +12,7 @@ USE hrdb2019;
 /*
 - 합, 평균값, 최댓값, 최솟값, 개수를 구함
 - 합과 평균값은 숫자에 대해서만 구할 수 있음
+	- NULL이 포함되면 NULL은 무시함(평균, 합에서 제외)
 - 최댓값, 최솟값, 개수는 문자와 날짜에 대해서 사용 가능
 - 날짜의 최솟값 = 가장 빠른(오래된) 날짜
 - 날짜의 최댓값 = 가장 최근 날짜
@@ -37,12 +38,24 @@ SELECT MAX(salary) AS max_salary,
 
 
 -- Q) 홍길동의 2014년 휴가 일수 합계 조회  
-
+SELECT SUM(duration) AS 휴가일수
+	FROM vacation
+	WHERE emp_id = (SELECT emp_id FROM employee WHERE emp_name='홍길동')
+		  AND begin_date >= '20140101'
+		  AND end_date <= '20141231';
 
 
 -- Q) 가장 최근에 직원이 입사한 날짜 조회
-
+SELECT MAX(hire_date) AS 최근입사일
+	FROM employee;
  
+ 
+ -- Q) 가장 최근에 입사한 직원의 정보 조회
+SELECT *
+	FROM employee
+	WHERE hire_date = (SELECT MAX(hire_date) FROM employee); -- 하위 쿼리
+    -- WHERE hire_date = MAX(hire_date) (X)
+
 
 -- 2) 집계 함수와 NULL 값
 
@@ -112,11 +125,18 @@ SELECT dept_id,
 
 
 -- Q) 근무 중인 직원의 부서별 급여 합 조회
-
+SELECT dept_id, SUM(salary) AS 급여합
+	FROM employee
+	WHERE retire_date IS NULL
+	GROUP BY dept_id;
 
 
 -- Q) 부서별로 급여가 5,000보다 많은 근무중인 직원 수 조회
-
+SELECT dept_id, COUNT(*) AS 직원수
+	FROM employee
+	WHERE retire_date IS NULL
+		  AND salary > 5000
+	GROUP BY dept_id;
 
 
 -- 4) 집계 결과에 대한 조건
@@ -146,9 +166,16 @@ SELECT dept_id, COUNT(*) AS emp_count
     
 
 -- Q) 2017년 휴가일수 합이 5가 넘는 직원의 사번과 휴가일수 합 조회
-
+SELECT emp_id, SUM(duration)
+	FROM vacation
+	WHERE begin_date >= '20170101' AND end_date <= '20171231'
+	GROUP BY emp_id
+	HAVING  SUM(duration) > 5;
 
 
 -- Q) 2017년에 3회 이상 휴가를 간 직원의 사번과 휴가 횟수 조회
-
-
+SELECT emp_id, COUNT(*)
+	FROM vacation
+	WHERE begin_date >= '20170101' AND end_date <= '20171231'
+	GROUP BY emp_id
+	HAVING COUNT(*) >= 3;

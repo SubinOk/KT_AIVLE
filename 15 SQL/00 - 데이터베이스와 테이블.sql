@@ -16,6 +16,15 @@ CREATE DATABASE mydb;
 -- 대상 데이터베이스로 연결
 USE mydb;
 
+-- 현재 데이터베이스
+select database();
+
+/*
+- CREATE: 생성
+- ALTER: 변경
+- DROP: 제거
+*/
+
 -- 기존 테이블 제거
 DROP TABLE IF EXISTS vacation;
 DROP TABLE IF EXISTS employee;
@@ -113,7 +122,7 @@ CREATE TABLE vacation (
 3) TINYINT
 - 크기: 1 ~ 255 바이트
 
-4) TEST
+4) TEXT
 - 크기: 1 ~ 65,535 바이트
 
 5) MEDIUMTEXT
@@ -171,7 +180,7 @@ INSERT INTO vacation(emp_id, begin_date, end_date, reason) VALUES('S0001', '2013
 INSERT INTO vacation(emp_id, begin_date, end_date, reason) VALUES('S0001', '2013-08-03', '2013-08-08', '놀고싶어서');
 INSERT INTO vacation(emp_id, begin_date, end_date, reason) VALUES('S0002', '2013-11-17', '2013-11-17', '두통');
 INSERT INTO vacation(emp_id, begin_date, end_date, reason) VALUES('S0001', '2013-12-01', '2013-12-15', '비밀');
-INSERT INTO vacation(emp_id, begin_date, end_date, reason) VALUES('S0002', '2014-02-10', '2014-02-13', '두통');
+INSERT INTO vacation(edepartmentmp_id, begin_date, end_date, reason) VALUES('S0002', '2014-02-10', '2014-02-13', '두통');
 
 
 -- 4) 테이블, 열 변경
@@ -180,13 +189,13 @@ SELECT *
     FROM employee;
 
 -- 테이블 정보 확인    
-DESCRIBE 직원;
+DESCRIBE employee;
 
 -- 테이블 이름 변경
 ALTER TABLE employee 
     RENAME TO 직원;
 
--- 데이터 형식 바꾸기
+-- 데이터 형식 바꾸기(SQLite는 지원하지 않음)
 ALTER TABLE 직원 
     MODIFY phone varchar(20) NOT NULL;
 
@@ -219,50 +228,66 @@ DESCRIBE 직원;
 
 -- Q1) mydb에 친구 정보를 저장할 테이블 friend 테이블을 만드세요. 
 --     단, 열은 5개 이상 만들어야 합니다.
+USE mydb;
 
+drop table if exists friend;
+
+CREATE TABLE friend (
+	friend_id INT NOT NULL AUTO_INCREMENT,
+	friend_name VARCHAR(20) NOT NULL,
+    birthday DATE NOT NULL,
+    gender CHAR(1) NOT NULL,
+    phone VARCHAR(13) NOT NULL,
+    PRIMARY KEY(friend_id),
+	UNIQUE(phone)
+);
 
 
 -- Q2) mydb에 다음 쿼리를 수행하여 orders 테이블을 만드세요.
 
 CREATE TABLE orders (
-	order_id int NOT NULL,
-    product_id char(5) NOT NULL,
-    customer_id varchar(20) NOT NULL,
-    qty int NOT NULL,
-    unit_price int NOT NULL,
+	order_id INT NOT NULL,
+    product_id CHAR(5) NOT NULL,
+    customer_id VARCHAR(20) NOT NULL,
+    qty INT NOT NULL,
+    unit_price INT NOT NULL,
     PRIMARY KEY (order_id)
 );
 
 
 -- Q3) Orders 테이블 구조를 확인하세요.
-
+DESCRIBE orders;
 
 
 
 -- Q4) order_date 열을 datetime 형으로 추가하세요. 
 --     단 NULL 값을 허용하지 않아야 합니다.
-
+ALTER TABLE orders
+	ADD order_data DATETIME NOT NULL;
  
 -- 확인
 DESCRIBE orders;
 
 
 -- Q5) qty 열 이름을 quantity로 변경하세요.
-
+ALTER TABLE orders
+	RENAME COLUMN qty TO quntity;
     
 -- 확인
 DESCRIBE orders;
  
  
 -- Q6) amount 열을 int 형으로 추가하세요. 단 NULL 값을 허용하지 않아야 합니다. 
- 
+ALTER TABLE orders
+	ADD amount INT NOT NULL;
  
 -- 확인
 DESCRIBE orders;
  
  
 -- Q7) orders 테이블 이름을 order_header로 변경하세요.
- 
+ALTER TABLE orders
+	RENAME TO order_header;
  
 -- 테이을 목록 확인 
 SHOW TABLES;

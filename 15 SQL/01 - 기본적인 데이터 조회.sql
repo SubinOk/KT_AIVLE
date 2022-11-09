@@ -138,23 +138,31 @@ SELECT emp_name, emp_id, dept_id, gender, hire_date, phone
 
 
 -- Q) vacation 테이블 모든 데이터 조회
-
+SELECT *
+	FROM vacation;
 
 
 -- Q) unit 테이블 모든 데이터 조회
-
+SELECT *
+	FROM unit;
 
 
 -- Q) 남자 직원의 사번, 이름, 입사일 정보 조회
-
+SELECT emp_id, emp_name, hire_date
+	FROM employee
+    WHERE gender = 'M';
 
 
 -- Q) 2016년 6월 1일 입사자의 이름, 부서코드, 성별, 이메일 정보 조회
-
+SELECT emp_name, dept_id, gender, email
+	FROM employee
+    where hire_date = '2016-06-01';
     
     
 -- Q) 휴가 기간이 5일 이상인 사번, 휴가시작일, 휴가사유 정보 조회
-
+SELECT emp_id, begin_date, reason
+	FROM vacation
+	WHERE duration >= 5;
 
 
 
@@ -187,11 +195,15 @@ SELECT emp_id, emp_name, dept_id, hire_date, email, phone
     
     
 -- Q) 전화번호가 017로 시작하는 직원 정보 조회
-
+SELECT *
+	FROM employee
+    where phone LIKE '017%';
 
 
 -- Q) 전화번호가 010으로 시작하지 않는 직원 정보 조회
-
+SELECT *
+	FROM employee
+    where phone NOT LIKE '010%';
 
 
 -- 8) 논리 연산자: AND, OR, NOT 
@@ -221,11 +233,15 @@ SELECT emp_name, emp_id, dept_id, hire_date, phone
 
 
 -- Q) 2018년부터 입사한 SYS 부서 직원 정보 조회
-
+SELECT emp_id, emp_name, dept_id, phone, hire_date
+FROM employee
+WHERE dept_id = 'SYS' AND hire_date >= '20180101';
 
 
 -- Q) SYS 부서 직원 중에서 급여를 6,000 이상 받는 직원 정보 조회
-
+SELECT emp_id, emp_name, dept_id, phone, hire_date
+FROM employee
+WHERE dept_id = 'SYS' AND salary >= 6000;
     
     
 -- 9) 범위 조건(BETWEEN)과 리스트 조건(IN)
@@ -248,15 +264,25 @@ SELECT emp_name, emp_id, dept_id, hire_date, phone
 
 
 -- Q) 2014년도에 입사한 정보시스템, 영업팀 직원 정보 조회
-
+SELECT emp_name, emp_id, dept_id, hire_date, phone
+	FROM employee
+	WHERE dept_id IN ('SYS', 'MKT');
 
 
 -- Q) 2015년도에 입사한 연봉이 6,000 이상인 근무중인 직원 정보 조회
-
+SELECT emp_id, emp_name, dept_id, phone, hire_date
+	FROM employee
+	WHERE hire_date BETWEEN '20150101' AND '20151231'
+		AND salary >= 6000 
+		AND retire_date IS NULL;
 
 
 -- Q) 홍길동(S0001), 강우동(S0003), 오삼식(S0005)의 2015년 휴가 정보 조회
-
+SELECT emp_id, begin_date, end_date, reason, duration
+	FROM vacation
+	WHERE emp_id IN ('S0001','S0003','S0005')
+		AND begin_date >= '20150101'
+		AND end_date <= '20151231';
 
 
 -- 10) NULL 값
@@ -307,7 +333,7 @@ SELECT emp_name, emp_id, IFNULL(eng_name, '') AS 'nick_name', gender, dept_id, h
 
 /*
 참고: DBMS마다 다른 NULL 처리 함수
--- MySQL: IFNULL()
+-- MySQL, SQLite: IFNULL()
 -- MSSQL: ISNULL()
 -- ORACLE: NVL()
 */
@@ -319,12 +345,15 @@ SELECT emp_name, emp_id, COALESCE(eng_name, '') AS 'nick_name', gender, dept_id,
 
 
 -- Q) 본부에 속하지 않은 부서 정보 조회
-
+SELECT dept_id, dept_name
+	FROM department
+    WHERE unit_id is NULL;
 
 
 -- Q) 영어 이름이 없는 근무중인 직원 정보 조회
-
-employee
+SELECT *
+	FROM employee
+	WHERE eng_name IS NULL;
 
 
 -- 11) 데이터 결합
@@ -334,17 +363,25 @@ employee
 - 결합되는 값에 NULL 값이 포함되면 결합 결과가 NULL이 됨
 */
 
--- 자동 형 변환
-SELECT '10' + '20';
-SELECT 10 + '20'; 
-SELECT 10 + '20AX';
-SELECT 10 + 'LX20';
+-- 자동 형 변환(SQLite도 동일)
+SELECT '10' + '20'; -- 30
+SELECT 10 + '20';  -- 30
+SELECT 10 + '20AX'; -- 30
+SELECT 10 + 'LX20'; -- 0
+SELECT 'A' + 'B'; -- 0
 
--- 문자열 데이터 결합
-SELECT CONCAT('10', '20');
-SELECT CONCAT(10, '20');
-SELECT CONCAT(10, 20);
-SELECT CONCAT(10, NULL);
+-- 문자열 데이터 결합(SQLite는 지원하지 않음)
+SELECT CONCAT('10', '20'); -- 1020
+SELECT CONCAT(10, '20'); -- 1020
+SELECT CONCAT(10, 20); -- 1020
+SELECT CONCAT(10, NULL); -- NULL
+
+/*
+(SQLite version)
+SELECT '10' || '20'; -- 1020
+SELECT 10 || '20';  -- 1020
+SELECT 10 || 20 || 30; -- 102030
+*/
 
 -- 열 데이터 결합
 SELECT CONCAT(emp_name, '(', emp_id, ')') AS emp_name, dept_id, gender, hire_date, email
@@ -380,7 +417,9 @@ SELECT CONCAT(emp_name, IFNULL(CONCAT('(', eng_name, ')'), '')) AS emp_name, dep
 
 
 -- Q) 사원번호와 부서코드를 묶어서(예: S0001(SYS)) 근무중인 직원 정보 조회
-
+SELECT emp_name, CONCAT(emp_id, '(', dept_id, ')') AS emp_id, gender, hire_date, email
+	FROM employee
+    WHERE retire_date IS NULL;
     
     
 -- 12) 데이터 정렬
@@ -415,7 +454,10 @@ SELECT dept_id, emp_name, emp_id, gender, hire_date, phone
 
 
 -- Q) 연봉이 높은 순으로 정렬해서 근무중인 직원 정보 조회
-
+SELECT dept_id, emp_name, salary, emp_id, gender, hire_date
+	FROM employee
+    WHERE retire_date IS NULL
+    ORDER BY salary DESC;
     
     
 -- 13) CASE 문
@@ -444,7 +486,11 @@ SELECT emp_name, emp_id, gender, hire_date, salary,
 
 
 -- Q) 급여 크기를 상, 중, 하로 구분
-
+SELECT emp_name, emp_id, gender, hire_date, salary,
+	CASE WHEN salary > 6000 THEN '상'
+		 WHEN salary >= 5000 THEN '중'
+         ELSE '하' END AS salary_level
+	FROM employee;
 
 
 -- 14) IF 함수
@@ -468,7 +514,9 @@ SELECT emp_name, emp_id, gender, hire_date, salary,
 
 
 -- Q) 급여 크기를 상, 중, 하로 구분
-
+SELECT emp_name, emp_id, gender, hire_date, salary,
+	IF(salary > 6000, '상', IF(salary >= 5000, '중', '하')) AS salary_level
+	FROM employee;
 
 
 
